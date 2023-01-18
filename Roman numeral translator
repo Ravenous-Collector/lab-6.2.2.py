@@ -14,25 +14,30 @@ def main():
             x = 5
         elif x.upper() == 'I':
             x = 1
+        elif x == '0':
+            x = 0
         return x
 
     def calculus():
         total = 0
         s = ' '
+        from copy import deepcopy
         while s != '':
             s = str(input('Roman number: ')).upper()
+            print(len(s))
             for i in range(len(s)):
                 if len(s) == 1 or translator(s[0]) >= translator(s[1]):
-                    total += translator(s[0])
-                    print(s)
-                    s = s.replace(s[0], '')
+                    total = total + translator(s[0])
+                    print(s, i)
+                    s = deepcopy(s[1:])
                 else:
                     difference = translator(s[1]) - translator(s[0])
                     total += difference
-                    print(s)
-                    s = s.replace(s[1], '')
-                    s = s.replace(s[0], '')
-            print(total)
+                    print(s, 'diff', i)
+                    print(total)
+                    s = deepcopy(s[2:]) + '0'
+            print('_' * 45)
+            print('Your "translation" is:', total)
     calculus()
 
 

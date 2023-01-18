@@ -1,0 +1,40 @@
+def main():
+    def translator(x):
+        if x.upper() == 'M':
+            x = 1000
+        elif x.upper() == 'D':
+            x = 500
+        elif x.upper() == 'C':
+            x = 100
+        elif x.upper() == 'L':
+            x = 50
+        elif x.upper() == 'X':
+            x = 10
+        elif x.upper() == 'V':
+            x = 5
+        elif x.upper() == 'I':
+            x = 1
+        return x
+
+    def calculus():
+        total = 0
+        s = ' '
+        while s != '':
+            s = str(input('Roman number: ')).upper()
+            for i in range(len(s)):
+                if len(s) == 1 or translator(s[0]) >= translator(s[1]):
+                    total += translator(s[0])
+                    print(s)
+                    s = s.replace(s[0], '')
+                else:
+                    difference = translator(s[1]) - translator(s[0])
+                    total += difference
+                    print(s)
+                    s = s.replace(s[1], '')
+                    s = s.replace(s[0], '')
+            print(total)
+    calculus()
+
+
+if __name__ == '__main__':
+    main()
